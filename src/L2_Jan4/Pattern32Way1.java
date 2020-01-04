@@ -7,7 +7,7 @@ package L2_Jan4;
  *
  */
 
-public class Pattern32 {
+public class Pattern32Way1 {
 
 	public static void main(String[] args) {
 
