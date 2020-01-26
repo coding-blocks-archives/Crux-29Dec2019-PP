@@ -74,10 +74,13 @@ public class StringDemo {
 
 		int n = 100000;
 
-		String str = "";
+		// String str = "";
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 1; i <= n; i++) {
-			str = str + i;
+			// str = str + i;
+			sb.append(i);
+
 		}
 
 	}
