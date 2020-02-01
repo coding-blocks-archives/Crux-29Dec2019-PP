@@ -16,9 +16,15 @@ public class Recursion {
 		// System.out.println(power(2, 100000));
 		// System.out.println(fibonacci(50));
 
-		int[] arr = { 10, 20, 30 };
-		displayArray(arr, 0);
-		System.out.println();
+		int[] arr = { 100, 5, 60, 30, 15, 30, 30 };
+		// displayArray(arr, 0);
+		// System.out.println(maximumArray(arr, 0));
+		// System.out.println(findFirstIndex(arr, 0, 30));
+		int[] res = findAllIndex(arr, 0, 30, 0);
+
+		for (int val : res)
+			System.out.println(val);
+		// System.out.println();
 
 		System.out.println("bye");
 	}
@@ -114,12 +120,81 @@ public class Recursion {
 
 	}
 
-	public static int maximumArray(int[] arr) {
+	public static int maximumArray(int[] arr, int idx) {
+
+		if (idx == arr.length - 1) {
+			return arr[idx];
+		}
+
+		int maxTillNow = maximumArray(arr, idx + 1);
+
+		if (arr[idx] > maxTillNow) {
+			return arr[idx];
+		} else {
+			return maxTillNow;
+		}
 
 	}
 
-	public static findFirstIndex(int[] arr) {
-		
+	public static int findFirstIndex(int[] arr, int idx, int item) {
+
+		if (idx == arr.length) {
+			return -1;
+		}
+
+		if (arr[idx] == item) {
+			return idx;
+		}
+
+		int res = findFirstIndex(arr, idx + 1, item);
+
+		return res;
 	}
 
+	public static int findLastIndex(int[] arr, int idx, int item) {
+
+		if (idx == arr.length) {
+			return -1;
+		}
+
+		int rr = findLastIndex(arr, idx + 1, item);
+
+		if (arr[idx] == item && rr == -1) {
+			return idx;
+		}
+
+		return rr;
+	}
+
+	public static int findLastIndex2(int[] arr, int idx, int item, int temp) {
+
+		if (idx == arr.length) {
+			return temp;
+		}
+
+		if (arr[idx] == item) {
+			temp = idx;
+		}
+
+		int rr = findLastIndex2(arr, idx + 1, item, temp);
+		return rr;
+	}
+
+	public static int[] findAllIndex(int[] arr, int idx, int item, int count) {
+
+		if (idx == arr.length) {
+			int[] br = new int[count];
+			return br;
+		}
+
+		if (arr[idx] == item) {
+			int[] rr = findAllIndex(arr, idx + 1, item, count + 1);
+			rr[count] = idx;
+			return rr;
+		} else {
+			int[] rr = findAllIndex(arr, idx + 1, item, count);
+			return rr;
+		}
+
+	}
 }
