@@ -1,10 +1,9 @@
-package Assingment.Feb5;
+package Assignment.Feb5;
 
 public class demo {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
 		sum(1,2,3);
 	}
 

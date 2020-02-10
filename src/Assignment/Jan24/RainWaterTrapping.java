@@ -1,11 +1,10 @@
-package Assingment.Jan24;
+package Assignment.Jan24;
 
 import java.util.Scanner;
 
 public class RainWaterTrapping {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		Scanner scn = new Scanner(System.in);
 

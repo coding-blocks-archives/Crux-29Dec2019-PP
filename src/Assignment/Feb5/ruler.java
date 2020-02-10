@@ -1,10 +1,8 @@
-package Assingment.Feb5;
+package Assignment.Feb5;
 
 public class ruler {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 		ruler(2, 4);
 	}
 

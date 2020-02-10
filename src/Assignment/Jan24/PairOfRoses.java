@@ -1,4 +1,4 @@
-package Assingment.Jan24;
+package Assignment.Jan24;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -6,8 +6,7 @@ import java.util.Scanner;
 public class PairOfRoses {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
 		Scanner scn = new Scanner(System.in);
 
 		int t = scn.nextInt();

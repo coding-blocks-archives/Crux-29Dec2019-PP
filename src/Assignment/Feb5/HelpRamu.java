@@ -1,11 +1,10 @@
-package Assingment.Feb5;
+package Assignment.Feb5;
 
 import java.util.Scanner;
 
 public class HelpRamu {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		Scanner scn = new Scanner(System.in);
 

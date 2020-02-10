@@ -1,10 +1,9 @@
-package Assingment.Feb5;
+package Assignment.Feb5;
 
 public class PainterPartition {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
 		int nob = 4;
 		int nop = 2;
 		int[] boards = { 12, 34, 67, 90 };

@@ -1,4 +1,4 @@
-package Assingment.Jan24;
+package Assignment.Jan24;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class TargetSumPair {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		Scanner scn = new Scanner(System.in);
 
@@ -23,7 +22,7 @@ public class TargetSumPair {
 		Arrays.sort(arr);
 
 		printPairs(arr, target);
-//		print3Pairs(arr, 10);
+		// print3Pairs(arr, 10);
 	}
 
 	public static void printPairs(int[] arr, int target) {

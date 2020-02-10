@@ -1,13 +1,13 @@
-package Assingment.Jan24;
+package Assignment.Jan24;
 
 import java.util.Scanner;
 
-public class pascalTriangle {
+public class PascalTriangle {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
 		Scanner scn = new Scanner(System.in);
+		
 		int n = scn.nextInt();
 		int nst = 1;
 		int row = 1;

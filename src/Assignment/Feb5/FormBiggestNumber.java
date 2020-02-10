@@ -1,10 +1,9 @@
-package Assingment.Feb5;
+package Assignment.Feb5;
 
 public class FormBiggestNumber {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	
 		int[] arr = { 95, 113, 98, 9 };
 		bubbleSort(arr);
 

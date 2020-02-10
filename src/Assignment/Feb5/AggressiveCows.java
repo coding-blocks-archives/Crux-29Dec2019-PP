@@ -1,12 +1,11 @@
-package Assingment.Feb5;
+package Assignment.Feb5;
 
 import java.util.Arrays;
 
 public class AggressiveCows {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	
 		int noc = 3;
 		int nos = 5;
 		int[] stalls = { 1, 2, 8, 4, 9 };
