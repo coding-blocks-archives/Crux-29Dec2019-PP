@@ -1,6 +1,6 @@
 package Assignment.Feb5;
 
-public class ruler {
+public class Ruler {
 
 	public static void main(String[] args) {
 		ruler(2, 4);
