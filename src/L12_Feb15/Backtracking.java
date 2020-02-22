@@ -26,20 +26,25 @@ public class Backtracking {
 
 		String word = "SEA";
 
-		char[][] board = { { 'A', 'B', 'C', 'E' }, { 'S', 'F', 'C', 'S' }, { 'A', 'D', 'A', 'E' } };
+		// char[][] board = { { 'A', 'B', 'C', 'E' }, { 'S', 'F', 'C', 'S' }, { 'A',
+		// 'D', 'A', 'E' } };
+		//
+		// boolean res = false;
+		//
+		// for (int i = 0; i < board.length; i++) {
+		// for (int j = 0; j < board[0].length; j++) {
+		//
+		// if (board[i][j] == word.charAt(0))
+		// res = res || WordSearch2(board, i, j, word, 0, new
+		// boolean[board.length][board[0].length]);
+		//
+		// }
+		// }
+		//
+		// System.out.println(res);
 
-		boolean res = false;
-
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board[0].length; j++) {
-
-				if (board[i][j] == word.charAt(0))
-					res = res || WordSearch2(board, i, j, word, 0, new boolean[board.length][board[0].length]);
-
-			}
-		}
-
-		System.out.println(res);
+		// NQueen2(new boolean[4][4], 0, "");
+		KQueen(new boolean[4][4], 0, 3, 0, "");
 
 	}
 
@@ -286,4 +291,47 @@ public class Backtracking {
 
 	}
 
+	public static void NQueen2(boolean[][] board, int row, String ans) {
+
+		if (row == board.length) {
+			System.out.println(++count + " " + ans);
+			return;
+		}
+
+		for (int col = 0; col < board[0].length; col++) {
+
+			if (isItSafeToPlaceQueen(board, row, col)) {
+				board[row][col] = true;
+				NQueen2(board, row + 1, ans + "[" + row + "-" + col + "] ");
+				board[row][col] = false;
+			}
+		}
+
+	}
+
+	public static void KQueen(boolean[][] board, int row, int tq, int qpsf, String ans) {
+
+		if (qpsf == tq) {
+			System.out.println(++count + " " + ans);
+			return;
+		}
+
+		if (row == board.length) {
+			// System.out.println(++count + " " + ans);
+			return;
+		}
+
+		for (int col = 0; col < board[0].length; col++) {
+
+			if (isItSafeToPlaceQueen(board, row, col)) {
+				board[row][col] = true;
+				KQueen(board, row + 1, tq, qpsf + 1, ans + "[" + row + "-" + col + "] ");
+				board[row][col] = false;
+			}
+
+		}
+
+		KQueen(board, row + 1, tq, qpsf, ans);
+
+	}
 }
