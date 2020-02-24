@@ -1,5 +1,7 @@
 package L14_Feb22;
 
+import java.util.Arrays;
+
 /**
  * @author Garima Chhikara
  * @email garima.chhikara@codingblocks.com
@@ -14,7 +16,9 @@ public class TimeComplexity {
 		// System.out.println(polymomial(3, 5));
 		// System.out.println(power(2, 10));
 
-		System.out.println(countPalindromicSS("nitinn"));
+		// System.out.println(countPalindromicSS("nitinn"));
+
+		SOE(25);
 
 	}
 
@@ -81,4 +85,32 @@ public class TimeComplexity {
 		return count;
 	}
 
+	public static void SOE(int n) {
+
+		boolean[] primes = new boolean[n + 1];
+
+		Arrays.fill(primes, true);
+
+		primes[0] = primes[1] = false;
+
+		for (int table = 2; table * table <= n; table++) {
+
+			if (primes[table] == true) {
+
+				for (int multiplier = 2; table * multiplier <= n; multiplier++) {
+					primes[table * multiplier] = false;
+				}
+
+			}
+
+		}
+
+		for (int i = 0; i < primes.length; i++) {
+
+			if (primes[i]) {
+				System.out.println(i);
+			}
+		}
+
+	}
 }

@@ -1,5 +1,6 @@
 package L14_Feb22;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -25,38 +26,5 @@ public class Test {
 		System.out.println("hello");
 
 	}
-	
-	public static int coinToss(int n) {
 
-		if (n == 0) {
-			return 1;
-		}
-
-		int c1 = coinToss(n - 1);
-		int c2 = coinToss(n - 1);
-		
-		return c1 + c2 ;
-
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
-
