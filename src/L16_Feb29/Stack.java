@@ -9,8 +9,8 @@ package L16_Feb29;
 
 public class Stack {
 
-	private int[] data;
-	private int tos;
+	protected int[] data;
+	protected int tos;
 
 	public Stack() {
 		data = new int[5];
