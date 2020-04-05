@@ -11,16 +11,26 @@ public class LLClient {
 		list.addLast(30);
 		list.addLast(40);
 		list.addLast(50);
-		// list.addLast(60);
+		list.addLast(60);
+		list.addLast(70);
+		list.addLast(80);
+		// list.addLast(90);
 
 		list.display();
 		// list.reversePointerRecursively();
 		// list.reverseDataRecursively();
 
-		list.fold();
+		// list.fold();
 
-		list.display();
+		// list.display();
 
-		System.out.println(list.kthFromLast(2));
+		// System.out.println(list.kthFromLast(2));
+
+		// list.kReverse(3);
+		// list.createDummyList();
+
+		// list.display();
+
+		list.createDummyListLoop();
 	}
 }
