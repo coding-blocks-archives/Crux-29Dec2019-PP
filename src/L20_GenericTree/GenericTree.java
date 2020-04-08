@@ -1,7 +1,10 @@
 package L20_GenericTree;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.Scanner;
+
 
 /**
  * @author Garima Chhikara
@@ -155,24 +158,237 @@ public class GenericTree {
 		for (Node child : node.children) {
 
 			boolean cf = find(child, item);
-			
-			if(cf)
-				return true ;
+
+			if (cf)
+				return true;
 
 		}
 
-		return false ;
+		return false;
+
+	}
+
+	public void mirror() {
+		mirror(root);
+	}
+
+	private void mirror(Node node) {
+
+		for (Node child : node.children) {
+			mirror(child);
+		}
+
+		// self work : ArrayList Reverse
+		// int i = 0;
+		// int j = node.children.size() - 1;
+		//
+		// while (i < j) {
+		//
+		// Node in = node.children.get(i);
+		// Node jn = node.children.get(j);
+		//
+		// node.children.set(i, jn);
+		// node.children.set(j, in);
+		//
+		// i++;
+		// j--;
+		//
+		// }
+
+		Collections.reverse(node.children);
+
+	}
+
+	public void printAtLevel(int level) {
+		printAtLevel(root, level, 0);
+	}
+
+	private void printAtLevel(Node node, int level, int count) {
+
+		if (count == level) {
+			System.out.println(node.data);
+			return;
+
+		}
+		for (Node child : node.children) {
+			printAtLevel(child, level, count + 1);
+		}
+
+	}
+
+	public void linearize() {
+		linearize(root);
+	}
+
+	private void linearize(Node node) {
+
+		for (Node child : node.children) {
+			linearize(child);
+		}
+
+		// self work
+
+		while (node.children.size() > 1) {
+			Node temp = node.children.remove(1);
+			Node tail = getTail(node.children.get(0));
+			tail.children.add(temp);
+		}
+
+	}
+
+	private Node getTail(Node node) {
+
+		if (node.children.size() == 0) {
+			return node;
+		}
+
+		return getTail(node.children.get(0));
+
+	}
+
+	public void display2() {
+		display2(root);
+	}
+
+	private void display2(Node node) {
+
+		System.out.println("Hii " + node.data);
+
+		for (Node child : node.children) {
+			System.out.println("Going towards " + child.data);
+			display2(child);
+			System.out.println("Coming from " + child.data);
+		}
+
+		System.out.println("Bye " + node.data);
+
+	}
+
+	public void preorder() {
+		preorder(root);
+	}
+
+	private void preorder(Node node) {
+
+		System.out.println(node.data);
+
+		for (Node child : node.children) {
+			preorder(child);
+		}
+	}
+
+	public void postorder() {
+		postorder(root);
+	}
+
+	private void postorder(Node node) {
+
+		for (Node child : node.children) {
+			postorder(child);
+		}
+
+		System.out.println(node.data);
+
+	}
+
+	public void levelorder() {
+
+		LinkedList<Node> queue = new LinkedList<>();
+
+		// add root node and start the work
+		queue.addLast(root);
+
+		// work till queue is not empty
+		while (!queue.isEmpty()) {
+
+			// remove the node
+			Node rn = queue.removeFirst();
+
+			// print
+			System.out.print(rn.data + " ");
+
+			// children
+			for (Node child : rn.children) {
+				queue.addLast(child);
+			}
+
+		}
+
+		System.out.println();
+
+	}
+
+	public void levelorderLW1() {
+
+		LinkedList<Node> queue = new LinkedList<>();
+
+		// add root node and null and then start the work
+		queue.addLast(root);
+		queue.addLast(null);
+
+		// work till queue is not empty
+		while (!queue.isEmpty()) {
+
+			// remove the node
+			Node rn = queue.removeFirst();
+
+			if (rn == null) {
+				System.out.println();
+
+				if (queue.isEmpty()) {
+					break;
+				}
+
+				queue.addLast(null);
+				continue;
+			}
+
+			// print
+			System.out.print(rn.data + " ");
+
+			// children
+			for (Node child : rn.children) {
+				queue.addLast(child);
+			}
+
+		}
+
+		System.out.println();
+
+	}
+
+	public void levelorderLW2() {
+
+		LinkedList<Node> primary = new LinkedList<>();
+		LinkedList<Node> helper = new LinkedList<>();
+
+		// add root node and start the work
+		primary.addLast(root);
+
+		// work till queue is not empty
+		while (!primary.isEmpty()) {
+
+			// remove the node
+			Node rn = primary.removeFirst();
+
+			// print
+			System.out.print(rn.data + " ");
+
+			// children
+			for (Node child : rn.children) {
+				helper.addLast(child);
+			}
+
+			// primary queue : empty
+			if (primary.isEmpty()) {
+
+				System.out.println();
+				primary = helper;
+				helper = new LinkedList<>();
+			}
+
+		}
 
 	}
 
 }
-
-
-
-
-
-
-
-
-
-

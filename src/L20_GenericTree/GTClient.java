@@ -13,12 +13,22 @@ public class GTClient {
 
 		GenericTree gt = new GenericTree();
 		gt.display();
-		
-		System.out.println(gt.size());
-		System.out.println(gt.max());
-		System.out.println(gt.ht());
-		System.out.println(gt.find(600));
-		
+
+		// System.out.println(gt.size());
+		// System.out.println(gt.max());
+		// System.out.println(gt.ht());
+		// System.out.println(gt.find(600));
+
+		// gt.mirror();
+
+		// gt.display();
+
+		// gt.printAtLevel(4);
+
+		// gt.linearize();
+		// gt.display();
+		// gt.display2();
+		gt.levelorderLW2();
 
 	}
 
