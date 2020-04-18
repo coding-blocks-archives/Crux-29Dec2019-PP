@@ -23,6 +23,23 @@ public class BTClient {
 		
 		System.out.println(bt.diameter());
 		System.out.println(bt.diameter2());
+		System.out.println(bt.diameter3());
+		
+		System.out.println(bt.isBalanced2());
+		System.out.println(bt.isBalanced3());
+		
+		// 
+
+		BinaryTree bt2 = new BinaryTree() ;
+		
+		bt.flipEquivalent(bt2) ;
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }

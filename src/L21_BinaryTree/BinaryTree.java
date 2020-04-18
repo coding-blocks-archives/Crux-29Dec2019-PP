@@ -230,4 +230,158 @@ public class BinaryTree {
 		return Math.max(sd, Math.max(ld, rd));
 	}
 
+	private class DiaPair {
+		int dia = 0;
+		int ht = -1;
+	}
+
+	public int diameter3() {
+		return diameter3(root).ht;
+	}
+
+	private DiaPair diameter3(Node node) {
+
+		if (node == null) {
+			return new DiaPair();
+		}
+
+		DiaPair ldp = diameter3(node.left);
+		DiaPair rdp = diameter3(node.right);
+
+		DiaPair sdp = new DiaPair();
+
+		int ld = ldp.dia;
+		int rd = rdp.dia;
+		int sd = ldp.ht + rdp.ht + 2;
+
+		sdp.dia = Math.max(sd, Math.max(ld, rd));
+		sdp.ht = Math.max(ldp.ht, rdp.ht) + 1;
+
+		return sdp;
+
+	}
+
+	public boolean isBalanced2() {
+		return isBalanced2(root);
+	}
+
+	private boolean isBalanced2(Node node) {
+
+		if (node == null) {
+			return true;
+		}
+
+		boolean lb = isBalanced2(node.left);
+		boolean rb = isBalanced2(node.right);
+
+		int bf = ht(node.left) - ht(node.right);
+
+		if (lb && rb && bf >= -1 && bf <= 1) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	private class BalPair {
+		boolean isBal = true;
+		int ht = -1;
+	}
+
+	public boolean isBalanced3() {
+		return isBalanced3(root).isBal;
+	}
+
+	private BalPair isBalanced3(Node node) {
+
+		if (node == null) {
+			return new BalPair();
+		}
+
+		BalPair lbp = isBalanced3(node.left);
+		BalPair rbp = isBalanced3(node.right);
+
+		BalPair sbp = new BalPair();
+
+		boolean lb = lbp.isBal;
+		boolean rb = rbp.isBal;
+
+		int bf = lbp.ht - rbp.ht;
+
+		if (lb && rb && bf >= -1 && bf <= 1) {
+			sbp.isBal = true;
+		} else {
+			sbp.isBal = false;
+		}
+
+		sbp.ht = Math.max(lbp.ht, rbp.ht) + 1;
+
+		return sbp;
+
+	}
+
+	public boolean flipEquivalent(BinaryTree other) {
+		return flipEquivalent(root, other.root);
+	}
+
+	private boolean flipEquivalent(Node node1, Node node2) {
+
+		if (node1 == null && node2 == null) {
+			return true;
+		}
+
+		if (node1 == null && node2 != null) {
+			return false;
+		}
+
+		if (node1 != null && node2 == null) {
+			return false;
+		}
+
+		if (node1.data != node2.data) {
+			return false;
+		}
+
+		boolean ll = flipEquivalent(node1.left, node2.left);
+		boolean rr = flipEquivalent(node1.right, node2.right);
+
+		if (ll && rr) {
+			return true;
+		}
+
+		boolean lr = flipEquivalent(node1.left, node2.right);
+		boolean rl = flipEquivalent(node1.right, node2.left);
+
+		return (lr && rl);
+
+	}
+
+	// NLR : preorder
+	// LNR : inorder
+	// LRN : postorder
+	// NRL : rev postorder
+	// RNL : rev inorder
+	// RLN : rev preorder
+	public void preorder() {
+		preorder(root);
+	}
+
+	private void preorder(Node node) {
+
+		if (node == null) {
+			return;
+		}
+
+		// N
+		System.out.println(node.data);
+
+		// R
+		preorder(node.right);
+
+		// L
+		preorder(node.left);
+
+	}
+
 }
