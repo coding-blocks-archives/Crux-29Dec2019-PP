@@ -1,6 +1,7 @@
 package L21_BinaryTree;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * @author Garima Chhikara
@@ -71,6 +72,41 @@ public class BinaryTree {
 
 		// node is ready, now return the node
 		return nn;
+
+	}
+
+	public BinaryTree(int[] pre, int[] in) {
+		root = construct(pre, 0, pre.length - 1, in, 0, in.length - 1);
+	}
+
+	private Node construct(int[] pre, int plo, int phi, int[] in, int ilo, int ihi) {
+		
+		if(ilo > ihi || plo > phi) {
+			return null ;
+		}
+		
+		// create  a new node with plo
+		Node nn = new Node() ;
+		nn.data = pre[plo] ;
+		
+		// search for pre[plo] in inorder
+		int si =-1 ;
+		int nel = 0 ;
+		for(int i = ilo ; i <= ihi ; i++) {
+			
+			if(pre[plo] == in[i]) {
+				si = i ;
+				break ;
+			}
+			
+			nel++ ;
+		}
+		
+		// left and right child call
+		nn.left = construct(pre, plo+1, plo+nel, in, ilo, si-1) ;
+		nn.right = construct(pre, plo+nel+1, phi, in, si+1, ihi) ;
+		
+		return nn ;
 
 	}
 
@@ -381,6 +417,161 @@ public class BinaryTree {
 
 		// L
 		preorder(node.left);
+
+	}
+
+	private class Pair {
+		Node node;
+		boolean sd;
+		boolean ld;
+		boolean rd;
+	}
+
+	public void preoderI() {
+
+		// create a stack
+		Stack<Pair> stack = new Stack<>();
+
+		// create a starting pair
+		Pair sp = new Pair();
+		sp.node = root;
+
+		// put the sp in stack
+		stack.push(sp);
+
+		// work till your stack is not empty
+		while (!stack.isEmpty()) {
+
+			Pair tp = stack.peek();
+
+			if (tp.node == null) {
+				stack.pop();
+				continue;
+			}
+
+			if (tp.sd == false) {
+				System.out.println(tp.node.data);
+				tp.sd = true;
+			} else if (tp.ld == false) {
+
+				// create a new pair
+				Pair np = new Pair();
+				np.node = tp.node.left;
+
+				// push the np into stack
+				// if (np.node != null)
+				stack.push(np);
+
+				// put true in ld of tp
+				tp.ld = true;
+
+			} else if (tp.rd == false) {
+
+				// create a new pair
+				Pair np = new Pair();
+				np.node = tp.node.right;
+
+				// push the np into stack
+				// if (np.node != null)
+				stack.push(np);
+
+				// put true in ld of tp
+				tp.rd = true;
+
+			} else {
+				stack.pop();
+			}
+
+		}
+
+	}
+
+	public int sum() {
+		return sum(root);
+	}
+
+	private int sum(Node node) {
+
+		if (node == null) {
+			return 0;
+		}
+
+		int ls = sum(node.left);
+		int rs = sum(node.right);
+
+		return ls + rs + node.data;
+	}
+
+	// Approach 1 : using global variable
+	int maxSum = Integer.MIN_VALUE;
+
+	public int maxSubtreeSum1() {
+		maxSubtreeSum1(root);
+
+		return maxSum;
+	}
+
+	private int maxSubtreeSum1(Node node) {
+
+		if (node == null) {
+			return 0;
+		}
+
+		int ls = maxSubtreeSum1(node.left);
+		int rs = maxSubtreeSum1(node.right);
+
+		int nodeans = ls + rs + node.data;
+
+		if (nodeans > maxSum) {
+			maxSum = nodeans;
+		}
+
+		return nodeans;
+
+	}
+
+	// Approach 2: recursion is returning something (something -> max subtree sum)
+	public int maxSubtreeSum2() {
+		return maxSubtreeSum2(root);
+	}
+
+	private int maxSubtreeSum2(Node node) {
+
+		if (node == null) {
+			return Integer.MIN_VALUE;
+		}
+		int lMaxSubtreeSum = maxSubtreeSum2(node.left);
+		int rMaxSubtreeSum = maxSubtreeSum2(node.right);
+		int selfSum = sum(node.left) + node.data + sum(node.right);
+
+		return Math.max(selfSum, Math.max(lMaxSubtreeSum, rMaxSubtreeSum));
+	}
+
+	// Approach 3 : recursion will return you multiple values so that time complexity can be maintained as O(n)
+	private class MaxSubtreeSumPair {
+		int entireSum = 0;
+		int maxSubtreeSum = Integer.MIN_VALUE;
+	}
+
+	public int maxSubtreeSum3() {
+		return maxSubtreeSum3(root).maxSubtreeSum;
+	}
+
+	private MaxSubtreeSumPair maxSubtreeSum3(Node node) {
+
+		if (node == null) {
+			return new MaxSubtreeSumPair();
+		}
+		MaxSubtreeSumPair lp = maxSubtreeSum3(node.left);
+		MaxSubtreeSumPair rp = maxSubtreeSum3(node.right);
+
+		MaxSubtreeSumPair sp = new MaxSubtreeSumPair();
+
+		sp.entireSum = lp.entireSum + rp.entireSum + node.data;
+
+		sp.maxSubtreeSum = Math.max(sp.entireSum, Math.max(lp.maxSubtreeSum, rp.maxSubtreeSum));
+
+		return sp;
 
 	}
 
