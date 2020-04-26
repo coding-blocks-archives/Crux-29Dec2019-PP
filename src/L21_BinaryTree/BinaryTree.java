@@ -80,33 +80,33 @@ public class BinaryTree {
 	}
 
 	private Node construct(int[] pre, int plo, int phi, int[] in, int ilo, int ihi) {
-		
-		if(ilo > ihi || plo > phi) {
-			return null ;
+
+		if (ilo > ihi || plo > phi) {
+			return null;
 		}
-		
-		// create  a new node with plo
-		Node nn = new Node() ;
-		nn.data = pre[plo] ;
-		
+
+		// create a new node with plo
+		Node nn = new Node();
+		nn.data = pre[plo];
+
 		// search for pre[plo] in inorder
-		int si =-1 ;
-		int nel = 0 ;
-		for(int i = ilo ; i <= ihi ; i++) {
-			
-			if(pre[plo] == in[i]) {
-				si = i ;
-				break ;
+		int si = -1;
+		int nel = 0;
+		for (int i = ilo; i <= ihi; i++) {
+
+			if (pre[plo] == in[i]) {
+				si = i;
+				break;
 			}
-			
-			nel++ ;
+
+			nel++;
 		}
-		
+
 		// left and right child call
-		nn.left = construct(pre, plo+1, plo+nel, in, ilo, si-1) ;
-		nn.right = construct(pre, plo+nel+1, phi, in, si+1, ihi) ;
-		
-		return nn ;
+		nn.left = construct(pre, plo + 1, plo + nel, in, ilo, si - 1);
+		nn.right = construct(pre, plo + nel + 1, phi, in, si + 1, ihi);
+
+		return nn;
 
 	}
 
@@ -547,7 +547,8 @@ public class BinaryTree {
 		return Math.max(selfSum, Math.max(lMaxSubtreeSum, rMaxSubtreeSum));
 	}
 
-	// Approach 3 : recursion will return you multiple values so that time complexity can be maintained as O(n)
+	// Approach 3 : recursion will return you multiple values so that time
+	// complexity can be maintained as O(n)
 	private class MaxSubtreeSumPair {
 		int entireSum = 0;
 		int maxSubtreeSum = Integer.MIN_VALUE;
@@ -572,6 +573,58 @@ public class BinaryTree {
 		sp.maxSubtreeSum = Math.max(sp.entireSum, Math.max(lp.maxSubtreeSum, rp.maxSubtreeSum));
 
 		return sp;
+
+	}
+
+	private class BSTPair {
+		boolean isBST = true;
+		int max = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE;
+
+		int largestBSTRootNode;
+		int largestBSTSize;
+	}
+
+	public void isTreeBST() {
+		BSTPair ans = isTreeBST(root);
+
+		System.out.println(ans.largestBSTRootNode + " " + ans.largestBSTSize);
+	}
+
+	private BSTPair isTreeBST(Node node) {
+
+		if (node == null) {
+			return new BSTPair();
+		}
+
+		BSTPair lbp = isTreeBST(node.left);
+		BSTPair rbp = isTreeBST(node.right);
+
+		BSTPair sbp = new BSTPair();
+
+		sbp.max = Math.max(node.data, Math.max(lbp.max, rbp.max));
+		sbp.min = Math.min(node.data, Math.min(lbp.min, rbp.min));
+
+		if (lbp.isBST && rbp.isBST && node.data > lbp.max && node.data < rbp.min) {
+			sbp.isBST = true;
+
+			sbp.largestBSTRootNode = node.data;
+			sbp.largestBSTSize = lbp.largestBSTSize + rbp.largestBSTSize + 1;
+
+		} else {
+			sbp.isBST = false;
+
+			if (lbp.largestBSTSize > rbp.largestBSTSize) {
+				sbp.largestBSTRootNode = lbp.largestBSTRootNode;
+				sbp.largestBSTSize = lbp.largestBSTSize;
+			} else {
+				sbp.largestBSTRootNode = rbp.largestBSTRootNode;
+				sbp.largestBSTSize = rbp.largestBSTSize;
+			}
+
+		}
+
+		return sbp;
 
 	}
 
